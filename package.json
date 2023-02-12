@@ -1,0 +1,28 @@
+{
+  "name": "ecom",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node  server/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yung-coder/Shop.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yung-coder/Shop/issues"
+  },
+  "homepage": "https://github.com/yung-coder/Shop#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^6.9.1",
+    "nodemon": "^2.0.20"
+  }
+}

@@ -20,7 +20,7 @@ export const getAllProducts = async (req, res) => {
   });
 };
 
-// update product -- admin 
+// update product -- admin
 
 export const updateProduct = async (req, res) => {
   let product = await Product.findById(req.params.id);
@@ -41,5 +41,25 @@ export const updateProduct = async (req, res) => {
   res.status(200).json({
     success: true,
     product,
+  });
+};
+
+// delet product
+
+export const deletProduct = async (req, res, next) => {
+  const product = await Product.findById(req.params.id);
+
+  if (!product) {
+    return res.status(500).json({
+      success: false,
+      message: "Product not found",
+    });
+  }
+
+  await product.remove();
+
+  res.status(200).json({
+    success: true,
+    message: "Product deleted",
   });
 };

@@ -2,6 +2,7 @@ import Product from "../models/productModel.js";
 import ErrorHandler from "../utils/errorhandler.js";
 
 import catchasyncerror from "../middlewear/asyncerrors.js";
+import ApiFeatures from "../utils/apifeatures.js";
 
 // Creating Product  -- admin
 export const createProduct = catchasyncerror(async (req, res, next) => {
@@ -16,10 +17,18 @@ export const createProduct = catchasyncerror(async (req, res, next) => {
 // Get all Product
 
 export const getAllProducts = catchasyncerror(async (req, res) => {
-  const products = await Product.find();
+  const resultPerPage = 5;
+
+  const productCount = await Product.countDocuments();
+  const apifeature = new ApiFeatures(Product.find(), req.query)
+    .search()
+    .filter()
+    .pagination(resultPerPage);
+  const products = await apifeature.query;
   res.status(200).json({
     success: true,
     products,
+    productCount,
   });
 });
 

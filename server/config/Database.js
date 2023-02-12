@@ -9,7 +9,6 @@ const connectDatabase = () => {
     .then(() => {
       console.log("Mongo db is connected");
     })
-    .catch((error) => console.log(`${error} did not connect`));
 };
 
 export default connectDatabase;

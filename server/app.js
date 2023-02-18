@@ -5,10 +5,11 @@ const app = express();
 app.use(express.json());
 
 import Product from "./routes/productRoute.js";
+import user from "./routes/userRoute.js";
 
 app.use("/api/v1", Product);
-
-// middlewear error 
+app.use("/api/v1", user);
+// middlewear error
 app.use(Customerror);
 
 export default app;

@@ -6,20 +6,20 @@ import jwt from "jsonwebtoken";
 const userSchema = mongoose.Schema({
   name: {
     type: String,
-    required: [true, "Please Enter Your name"],
-    maxLength: [30, "Name exceed 30 characters"],
+    required: [true, "Please Enter Your Name"],
+    maxLength: [30, "Name cannot exceed 30 characters"],
     minLength: [4, "Name should have more than 4 characters"],
   },
   email: {
     type: String,
-    required: [true, "Please Enter your email"],
+    required: [true, "Please Enter Your Email"],
     unique: true,
-    validate: [validator.isEmail, "Please Enetr a valid Email"],
+    validate: [validator.isEmail, "Please Enter a valid Email"],
   },
   password: {
     type: String,
-    required: [true, "Please Enter your password"],
-    minLength: [8, "password should have more than 4 characters"],
+    required: [true, "Please Enter Your Password"],
+    minLength: [8, "Password should be greater than 8 characters"],
     select: false,
   },
   avatar: {
@@ -27,7 +27,6 @@ const userSchema = mongoose.Schema({
       type: String,
       required: true,
     },
-
     url: {
       type: String,
       required: true,
@@ -36,6 +35,10 @@ const userSchema = mongoose.Schema({
   role: {
     type: String,
     default: "user",
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
   },
 
   resetPasswordToken: String,
@@ -50,15 +53,19 @@ userSchema.pre("save", async function (next) {
   this.password = await bcrypt.hash(this.password, 10);
 });
 
+// JWT TOKEN
 userSchema.methods.getJWTToken = function () {
   return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRE,
   });
 };
 
-userSchema.methods.comparePassword = async function (enteredPassword) {
-  return await bcrypt.compare(enteredPassword, this.password);
+// Compare Password
+
+userSchema.methods.comparePassword = async function (password) {
+  return await bcrypt.compare(password, this.password);
 };
+
 
 const User = mongoose.model("User", userSchema);
 

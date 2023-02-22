@@ -1,11 +1,10 @@
-import ErrorHandler from "../utils/errorhandler.js";
+const ErrorHandler = require("../utils/errorhandler");
+const catchasyncerror = require("../middlewear/asyncerrors");
+const User = require("../models/userModel");
+const sendToken = require("../utils/jwtToken");
+const sendEmail = require("../utils/sendEmail");
 
-import catchasyncerror from "../middlewear/asyncerrors.js";
-
-import User from "../models/userModel.js";
-import sendToken from "../utils/jwtToken.js";
-
-export const registerUser = catchasyncerror(async (req, res, next) => {
+exports.registerUser = catchasyncerror(async (req, res, next) => {
   const { name, email, password } = req.body;
 
   const user = await User.create({
@@ -21,7 +20,7 @@ export const registerUser = catchasyncerror(async (req, res, next) => {
   sendToken(user, 201, res);
 });
 
-export const loginUser = catchasyncerror(async (req, res, next) => {
+exports.loginUser = catchasyncerror(async (req, res, next) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
@@ -43,7 +42,7 @@ export const loginUser = catchasyncerror(async (req, res, next) => {
   sendToken(user, 200, res);
 });
 
-export const logoutUser = catchasyncerror(async (req, res, next) => {
+exports.logoutUser = catchasyncerror(async (req, res, next) => {
   res.cookie("token", null, {
     expires: new Date(Date.now()),
     httpOnly: true,
@@ -55,7 +54,7 @@ export const logoutUser = catchasyncerror(async (req, res, next) => {
   });
 });
 
-export const forgotPassword = catchasyncerror(async (req, res, next) => {
+exports.forgotPassword = catchasyncerror(async (req, res, next) => {
   const user = await User.findOne({ email: req.body.email });
 
   if (!user) {
@@ -95,7 +94,7 @@ export const forgotPassword = catchasyncerror(async (req, res, next) => {
   }
 });
 
-export const resetPassword = catchasyncerror(async (req, res, next) => {
+exports.resetPassword = catchasyncerror(async (req, res, next) => {
   const resetPasswordToken = crypto
     .createHash("sha256")
     .update(req.params.token)
@@ -125,7 +124,7 @@ export const resetPassword = catchasyncerror(async (req, res, next) => {
   sendToken(user, 200, res);
 });
 
-export const getUserDetails = catchasyncerror(async (req, res, next) => {
+exports.getUserDetails = catchasyncerror(async (req, res, next) => {
   const user = await User.findById(req.user.id);
 
   res.status(200).json({
@@ -134,7 +133,7 @@ export const getUserDetails = catchasyncerror(async (req, res, next) => {
   });
 });
 
-export const UpdateUserPassword = catchasyncerror(async (req, res, next) => {
+exports.UpdateUserPassword = catchasyncerror(async (req, res, next) => {
   const user = await User.findById(req.user.id).select("+password");
   const isPassword = await user.comparePassword(req.body.oldPassword);
 
@@ -158,7 +157,7 @@ export const UpdateUserPassword = catchasyncerror(async (req, res, next) => {
   });
 });
 
-export const UpdateUserProfile = catchasyncerror(async (req, res, next) => {
+exports.UpdateUserProfile = catchasyncerror(async (req, res, next) => {
   const newUserData = {
     name: req.body.name,
     email: req.body.email,
@@ -173,7 +172,7 @@ export const UpdateUserProfile = catchasyncerror(async (req, res, next) => {
 });
 
 // --admin
-export const getAllUsers = catchasyncerror(async (req, res, next) => {
+exports.getAllUsers = catchasyncerror(async (req, res, next) => {
   const user = await User.find();
 
   res.status(200).json({
@@ -183,7 +182,7 @@ export const getAllUsers = catchasyncerror(async (req, res, next) => {
 });
 
 //  --admin
-export const getSingleUser = catchasyncerror(async (req, res, next) => {
+exports.getSingleUser = catchasyncerror(async (req, res, next) => {
   const user = await User.findById(req.params.id);
   if (!user) {
     return next(
@@ -196,7 +195,7 @@ export const getSingleUser = catchasyncerror(async (req, res, next) => {
   });
 });
 
-export const UpdateUserRole = catchasyncerror(async (req, res, next) => {
+exports.UpdateUserRole = catchasyncerror(async (req, res, next) => {
   const newUserData = {
     name: req.body.name,
     email: req.body.email,
@@ -214,7 +213,7 @@ export const UpdateUserRole = catchasyncerror(async (req, res, next) => {
   });
 });
 
-export const deletUser = catchasyncerror(async (req, res, next) => {
+exports.deletUser = catchasyncerror(async (req, res, next) => {
   const user = await User.findById(req.params.id);
   if (!user) {
     return next(

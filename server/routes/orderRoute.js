@@ -1,13 +1,13 @@
-import express from "express";
-import {
+const express = require("express");
+const {
   deletOrder,
   getAllOrders,
   getLoginedUserOrder,
   getSingleOrder,
   newOrder,
   updateOrder,
-} from "../controllers/orderController.js";
-import { isAuthenticated, authorizeRoles } from "../middlewear/auth.js";
+} =  require("../controllers/orderController");
+const { isAuthenticated, authorizeRoles } = require("../middlewear/auth");
 
 const router = express.Router();
 
@@ -25,4 +25,4 @@ router
   .put(isAuthenticated, authorizeRoles("admin"), updateOrder)
   .delete(isAuthenticated, authorizeRoles("admin"), deletOrder);
 
-export default router;
+module.exports = router;

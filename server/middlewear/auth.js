@@ -1,10 +1,9 @@
-import catchasyncerror from "../middlewear/asyncerrors.js";
-import ErrorHandler from "../utils/errorhandler.js";
-import jwt from "jsonwebtoken";
+const ErrorHandler = require("../utils/errorhandler");
+const catchasyncerror = require("./asyncerrors");
+const jwt = require("jsonwebtoken");
+const User = require("../models/userModel");
 
-import User from "../models/userModel.js";
-
-export const isAuthenticated = catchasyncerror(async (req, res, next) => {
+exports.isAuthenticated = catchasyncerror(async (req, res, next) => {
   const { token } = req.cookies;
 
   if (!token) {
@@ -18,7 +17,7 @@ export const isAuthenticated = catchasyncerror(async (req, res, next) => {
   next();
 });
 
-export const authorizeRoles = (...roles) => {
+exports.authorizeRoles = (...roles) => {
   return (req, res, next) => {
     if (!roles.includes(req.user.role)) {
       return next(

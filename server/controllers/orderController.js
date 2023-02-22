@@ -1,12 +1,9 @@
-import Order from "../models/orderModel.js";
+const Order = require("../models/orderModel");
+const Product = require("../models/productModel");
+const ErrorHandler = require("../utils/errorhandler");
+const catchasyncerror = require("../middlewear/asyncerrors");
 
-import ErrorHandler from "../utils/errorhandler.js";
-
-import catchasyncerror from "../middlewear/asyncerrors.js";
-
-import Product from "../models/productModel.js";
-
-export const newOrder = catchasyncerror(async (req, res, next) => {
+exports.newOrder = catchasyncerror(async (req, res, next) => {
   const {
     shippingInfo,
     orderItems,
@@ -35,7 +32,7 @@ export const newOrder = catchasyncerror(async (req, res, next) => {
   });
 });
 
-export const getSingleOrder = catchasyncerror(async (req, res, next) => {
+exports.getSingleOrder = catchasyncerror(async (req, res, next) => {
   const order = await Order.findById(req.params.id).populate(
     "user",
     "name email"
@@ -51,7 +48,7 @@ export const getSingleOrder = catchasyncerror(async (req, res, next) => {
   });
 });
 
-export const getLoginedUserOrder = catchasyncerror(async (req, res, next) => {
+exports.getLoginedUserOrder = catchasyncerror(async (req, res, next) => {
   const orders = await Order.find({ user: req.user._id });
 
   res.status(201).json({
@@ -61,7 +58,7 @@ export const getLoginedUserOrder = catchasyncerror(async (req, res, next) => {
 });
 
 // admin
-export const getAllOrders = catchasyncerror(async (req, res, next) => {
+exports.getAllOrders = catchasyncerror(async (req, res, next) => {
   const orders = await Order.find();
 
   let totalAmount = 0;
@@ -76,7 +73,7 @@ export const getAllOrders = catchasyncerror(async (req, res, next) => {
 });
 
 // admin
-export const updateOrder = catchasyncerror(async (req, res, next) => {
+exports.updateOrder = catchasyncerror(async (req, res, next) => {
   const order = await Order.findById(req.params.id);
 
   if (!order) {
@@ -114,7 +111,7 @@ async function updateStock(id, quantity) {
 
 // admin
 
-export const deletOrder = catchasyncerror(async (req, res, next) => {
+exports.deletOrder = catchasyncerror(async (req, res, next) => {
   const order = await Order.findById(req.params.id);
 
   if (!order) {

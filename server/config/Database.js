@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 const connectDatabase = () => {
   mongoose
@@ -8,7 +8,7 @@ const connectDatabase = () => {
     })
     .then(() => {
       console.log("Mongo db is connected");
-    })
+    });
 };
 
-export default connectDatabase;
+module.exports = connectDatabase;

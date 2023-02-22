@@ -1,19 +1,20 @@
-import express from "express";
-import { Customerror } from "./middlewear/error.js";
-import cookieParser from "cookie-parser";
-
+const express = require("express");
 const app = express();
+const cookieParser = require("cookie-parser");
+
+const errorMiddleware = require("./middlewear/error");
+
 app.use(express.json());
 app.use(cookieParser());
 
-import Product from "./routes/productRoute.js";
-import user from "./routes/userRoute.js";
-import order from "./routes/orderRoute.js";
+const Product = require("./routes/productRoute");
+const user = require("./routes/userRoute");
+const order = require("./routes/orderRoute");
 
 app.use("/api/v1", Product);
 app.use("/api/v1", user);
 app.use("/api/v1", order);
 // middlewear error
-app.use(Customerror);
+app.use(errorMiddleware);
 
-export default app;
+module.exports = app;

@@ -1,5 +1,6 @@
-import express from "express";
-import {
+const express = require("express");
+
+const {
   deletUser,
   forgotPassword,
   getAllUsers,
@@ -12,8 +13,8 @@ import {
   UpdateUserPassword,
   UpdateUserProfile,
   UpdateUserRole,
-} from "../controllers/userContrller.js";
-import { authorizeRoles, isAuthenticated } from "../middlewear/auth.js";
+} = require("../controllers/userContrller");
+const { isAuthenticated, authorizeRoles } = require("../middlewear/auth");
 
 const router = express.Router();
 
@@ -35,4 +36,4 @@ router
   .put(isAuthenticated, authorizeRoles("admin"), UpdateUserRole)
   .delete(isAuthenticated, authorizeRoles("admin"), deletUser);
 
-export default router;
+module.exports = router;

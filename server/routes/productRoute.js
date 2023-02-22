@@ -1,6 +1,6 @@
-import express from "express";
+const express = require("express");
 
-import {
+const {
   getAllProducts,
   createProduct,
   updateProduct,
@@ -9,8 +9,8 @@ import {
   createProductReview,
   getProductReviews,
   deletReview,
-} from "../controllers/productController.js";
-import { isAuthenticated, authorizeRoles } from "../middlewear/auth.js";
+}  =  require("../controllers/productController");
+const { isAuthenticated, authorizeRoles } = require("../middlewear/auth");
 
 const router = express.Router();
 
@@ -32,5 +32,4 @@ router
   .get(getProductReviews)
   .delete(isAuthenticated, deletReview);
 
-  
-export default router;
+module.exports = router;

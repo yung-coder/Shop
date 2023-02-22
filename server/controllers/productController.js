@@ -1,11 +1,10 @@
-import Product from "../models/productModel.js";
-import ErrorHandler from "../utils/errorhandler.js";
-
-import catchasyncerror from "../middlewear/asyncerrors.js";
-import ApiFeatures from "../utils/apifeatures.js";
+const Product = require("../models/productModel");
+const ErrorHandler = require("../utils/errorhandler");
+const catchasyncerror = require("../middlewear/asyncerrors");
+const ApiFeatures = require("../utils/apifeatures");
 
 // Creating Product  -- admin
-export const createProduct = catchasyncerror(async (req, res, next) => {
+exports.createProduct = catchasyncerror(async (req, res, next) => {
   req.body.user = req.user.id;
   const product = await Product.create(req.body);
 
@@ -17,7 +16,7 @@ export const createProduct = catchasyncerror(async (req, res, next) => {
 
 // Get all Product
 
-export const getAllProducts = catchasyncerror(async (req, res) => {
+exports.getAllProducts = catchasyncerror(async (req, res) => {
   const resultPerPage = 5;
 
   const productCount = await Product.countDocuments();
@@ -35,7 +34,7 @@ export const getAllProducts = catchasyncerror(async (req, res) => {
 
 // update product -- admin
 
-export const updateProduct = catchasyncerror(async (req, res) => {
+exports.updateProduct = catchasyncerror(async (req, res) => {
   let product = await Product.findById(req.params.id);
 
   if (!product) {
@@ -56,7 +55,7 @@ export const updateProduct = catchasyncerror(async (req, res) => {
 
 // delet product
 
-export const deletProduct = catchasyncerror(async (req, res, next) => {
+exports.deletProduct = catchasyncerror(async (req, res, next) => {
   const product = await Product.findById(req.params.id);
 
   if (!product) {
@@ -73,7 +72,7 @@ export const deletProduct = catchasyncerror(async (req, res, next) => {
 
 // get product details
 
-export const productDetails = catchasyncerror(async (req, res, next) => {
+exports.productDetails = catchasyncerror(async (req, res, next) => {
   const product = await Product.findById(req.params.id);
 
   if (!product) {
@@ -86,7 +85,7 @@ export const productDetails = catchasyncerror(async (req, res, next) => {
   });
 });
 
-export const createProductReview = catchasyncerror(async (req, res, next) => {
+exports.createProductReview = catchasyncerror(async (req, res, next) => {
   const { rating, productId, comment } = req.body;
 
   const review = {
@@ -127,7 +126,7 @@ export const createProductReview = catchasyncerror(async (req, res, next) => {
   });
 });
 
-export const getProductReviews = catchasyncerror(async (req, res, next) => {
+exports.getProductReviews = catchasyncerror(async (req, res, next) => {
   const product = await Product.findById(req.query.id);
   if (!product) {
     return next(new ErrorHandler("Product  not found", 404));
@@ -139,7 +138,7 @@ export const getProductReviews = catchasyncerror(async (req, res, next) => {
   });
 });
 
-export const deletReview = catchasyncerror(async (req, res, next) => {
+exports.deletReview = catchasyncerror(async (req, res, next) => {
   const product = await Product.findById(req.query.productid);
 
   if (!product) {

@@ -1,6 +1,5 @@
-import dotenv from "dotenv";
-import app from "./app.js";
-import connectDatabase from "./config/Database.js";
+const app = require("./app");
+const connectDatabase = require("./config/Database");
 
 // handling uncaugth exception
 
@@ -10,7 +9,9 @@ process.on("uncaughtException", (err) => {
   process.exit(1);
 });
 
-dotenv.config({ path: "server/config/config.env" });
+if (process.env.NODE_ENV !== "PRODUCTION") {
+  require("dotenv").config({ path: "server/config/config.env" });
+}
 
 //import routes from './routes';
 

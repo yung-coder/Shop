@@ -8,9 +8,11 @@ app.use(cookieParser());
 
 import Product from "./routes/productRoute.js";
 import user from "./routes/userRoute.js";
+import order from "./routes/orderRoute.js";
 
 app.use("/api/v1", Product);
 app.use("/api/v1", user);
+app.use("/api/v1", order);
 // middlewear error
 app.use(Customerror);
 

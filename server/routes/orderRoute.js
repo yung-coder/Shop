@@ -23,6 +23,6 @@ router
 router
   .route("/admin/order/:id")
   .put(isAuthenticated, authorizeRoles("admin"), updateOrder)
-  .updateOrder(isAuthenticated, authorizeRoles("admin"), deletOrder);
+  .delete(isAuthenticated, authorizeRoles("admin"), deletOrder);
 
 export default router;

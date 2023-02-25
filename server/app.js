@@ -1,11 +1,12 @@
 const express = require("express");
 const app = express();
 const cookieParser = require("cookie-parser");
-
+const cors = require('cors');
 const errorMiddleware = require("./middlewear/error");
 
 app.use(express.json());
 app.use(cookieParser());
+app.use(cors());
 
 const Product = require("./routes/productRoute");
 const user = require("./routes/userRoute");

@@ -1,15 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Products from "./Products";
 import { AiFillCaretDown } from "react-icons/ai";
+import { getProduct } from "../../actions/producaction";
+import { useSelector, useDispatch } from "react-redux";
+import axios from "axios";
 
-const products ={
-   name: "Shirt",
-   price: 456,
-   _id: "sample",
-   images: [{ url: "https://cdn.shopify.com/s/files/1/0752/6435/products/0E4A0809_765x.jpg?v=1660050592" }]
-}
+const products = {
+  name: "Shirt",
+  price: 456,
+  _id: "sample",
+  images: [
+    {
+      url: "https://cdn.shopify.com/s/files/1/0752/6435/products/0E4A0809_765x.jpg?v=1660050592",
+    },
+  ],
+};
 
 const Home = () => {
+  const dispatch = useDispatch();
+ 
+    useEffect(() => {
+    dispatch(getProduct());
+  }, [dispatch]);
+
   return (
     <>
       <div className="h-screen flex justify-center items-center flex-col bg-gradient-to-b from-gray-900 to-gray-600 bg-gradient-to-r">
@@ -27,7 +40,7 @@ const Home = () => {
         </div>
       </div>
 
-      <Products products={products}/>
+      <Products products={products} />
     </>
   );
 };

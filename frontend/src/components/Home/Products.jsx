@@ -2,7 +2,7 @@ import React from "react";
 import ProductCard from "../Card/ProductCard";
 
 const Products = ({ products }) => {
-  return (  
+  return (
     <div
       className=" h-screen overflow-auto  bg-gradient-to-b from-gray-900 via-purple-900 to-violet-600 flex justify-center  flex-col space-y-11"
       id="products"
@@ -13,16 +13,8 @@ const Products = ({ products }) => {
             Trending Products
           </h1>
         </div>
-        <ProductCard products={products} />
-        <ProductCard products={products} />
-        <ProductCard products={products} />
-        <ProductCard products={products} />
-        <ProductCard products={products} />
-        <ProductCard products={products} />
-        <ProductCard products={products} />
-        <ProductCard products={products} />
-        <ProductCard products={products} />
-        <ProductCard products={products} />
+        {products &&
+          products.map((product) => <ProductCard product={product} />)}
       </div>
     </div>
   );

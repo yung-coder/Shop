@@ -5,21 +5,15 @@ import { getProduct } from "../../actions/producaction";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 
-const products = {
-  name: "Shirt",
-  price: 456,
-  _id: "sample",
-  images: [
-    {
-      url: "https://cdn.shopify.com/s/files/1/0752/6435/products/0E4A0809_765x.jpg?v=1660050592",
-    },
-  ],
-};
+
 
 const Home = () => {
   const dispatch = useDispatch();
- 
-    useEffect(() => {
+  const { loading, error, products, productCount } = useSelector(
+    (state) => state.products
+  );
+
+  useEffect(() => {
     dispatch(getProduct());
   }, [dispatch]);
 

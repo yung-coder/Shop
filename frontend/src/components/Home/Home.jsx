@@ -2,6 +2,13 @@ import React from "react";
 import Products from "./Products";
 import { AiFillCaretDown } from "react-icons/ai";
 
+const products ={
+   name: "Shirt",
+   price: 456,
+   _id: "sample",
+   images: [{ url: "https://cdn.shopify.com/s/files/1/0752/6435/products/0E4A0809_765x.jpg?v=1660050592" }]
+}
+
 const Home = () => {
   return (
     <>
@@ -20,7 +27,7 @@ const Home = () => {
         </div>
       </div>
 
-      <Products />
+      <Products products={products}/>
     </>
   );
 };

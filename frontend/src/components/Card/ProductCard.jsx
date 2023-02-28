@@ -7,7 +7,7 @@ const ProductCard = ({ product }) => {
   return (
     <Link
       class="h-fit p-6 bg-white rounded-xl shadow-xl hover:shadow-2xl hove  r:scale-105 transition-all transform duration-500"
-      to={product._id}
+      to={`/product/${product._id}`}
     >
       <img
         class="w-full h-40   object-contain rounded-t-md"

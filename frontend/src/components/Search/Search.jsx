@@ -25,13 +25,13 @@ const Search = () => {
         <form
           action=""
           onSubmit={fromHandler}
-          className="flex space-x-5 w-[500px]"
+          className="flex space-x-5 justify-center items-center w-[300px] md:w-[500px]"
         >
           <input
             type="text"
             value={Keyword}
             onChange={(e) => setKeyword(e.target.value)}
-            class="bg-green-50  text-white placeholder-green-700 dark:placeholder-green-500 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-4 dark:bg-gray-700 dark:border-green-500"
+            class="bg-green-50  text-white placeholder-green-700 dark:placeholder-green-500 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 md:p-4  dark:bg-gray-700 dark:border-green-500"
           />
           <button type="submit" value="Search">
             <FcSearch size={45} />

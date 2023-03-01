@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import { getProduct } from "../../actions/producaction";
 import ProductCard from "../Card/ProductCard";
 
@@ -9,10 +10,12 @@ const Product = () => {
     (state) => state.products
   );
 
+  let { keyword } = useParams();
+
   console.log(products);
   useEffect(() => {
-    dispatch(getProduct());
-  }, [dispatch]);
+    dispatch(getProduct(keyword));
+  }, [dispatch, keyword]);
 
   return (
     <>

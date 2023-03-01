@@ -10,26 +10,29 @@ import {
   PRODUCT_DETAILS_FAIL,
 } from "../constants/productConstants";
 
-export const getProduct = () => async (dispatch) => {
-  try {
-    dispatch({
-      type: ALL_PRODUCT_REQUEST,
-    });
+export const getProduct =
+  (Keyword = "") =>
+  async (dispatch) => {
+    try {
+      dispatch({
+        type: ALL_PRODUCT_REQUEST,
+      });
 
-    const { data } = await axios.get("http://localhost:3000/api/v1/products");
+      const { data } = await axios.get(
+        `http://localhost:3000/api/v1/products?keyword=${Keyword}`
+      );
 
-    dispatch({
-      type: ALL_PRODUCT_SUCCESS,
-      payload: data,
-    });
-  } catch (error) {
-    dispatch({
-      type: ALL_PRODUCT_FAIL,
+      dispatch({
+        type: ALL_PRODUCT_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: ALL_PRODUCT_FAIL,
         payload: error.reponse.data.message,
-    });
-  }
-};
-
+      });
+    }
+  };
 
 export const getProductDetails = (id) => async (dispatch) => {
   try {
@@ -37,7 +40,9 @@ export const getProductDetails = (id) => async (dispatch) => {
       type: PRODUCT_DETAILS_REQUEST,
     });
 
-    const { data } = await axios.get(`http://localhost:3000/api/v1/product/${id}`);
+    const { data } = await axios.get(
+      `http://localhost:3000/api/v1/product/${id}`
+    );
 
     dispatch({
       type: PRODUCT_DETAILS_SUCCESS,
@@ -46,7 +51,7 @@ export const getProductDetails = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: PRODUCT_DETAILS_FAIL,
-        payload: error.reponse.data.message,
+      payload: error.reponse.data.message,
     });
   }
 };

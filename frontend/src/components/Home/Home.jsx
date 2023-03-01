@@ -3,7 +3,6 @@ import Products from "./Products";
 import { AiFillCaretDown } from "react-icons/ai";
 import { getProduct } from "../../actions/producaction";
 import { useSelector, useDispatch } from "react-redux";
-import axios from "axios";
 
 
 

@@ -52,7 +52,7 @@ const Product = () => {
                 products.map((product) => <ProductCard product={product} />)}
             </div>
 
-            <div className="absolute top-[10vmax] left-[4vmax] w-[10vmax]">
+            <div className="absolute top-[8vmax] left-[4vmax] w-[13vmax]  p-5 bg-white rounded-xl">
               <Typography>Price</Typography>
               <Slider
                 value={price}

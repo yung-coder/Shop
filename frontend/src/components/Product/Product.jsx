@@ -28,8 +28,8 @@ const Product = () => {
 
   console.log(products);
   useEffect(() => {
-    dispatch(getProduct(keyword, currentPage));
-  }, [dispatch, keyword, currentPage]);
+    dispatch(getProduct(keyword, currentPage, price));
+  }, [dispatch, keyword, currentPage, price]);
 
   return (
     <>
@@ -48,7 +48,7 @@ const Product = () => {
                 products.map((product) => <ProductCard product={product} />)}
             </div>
 
-            <div>
+            <div className="absolute top-[10vmax] left-[4vmax] w-[10vmax]">
               <Typography>Price</Typography>
               <Slider
                 value={price}

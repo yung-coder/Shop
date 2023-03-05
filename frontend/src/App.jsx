@@ -6,6 +6,7 @@ import Home from "./components/Home/Home";
 import Navbar from "./components/Navbar/Navbar";
 import Product from "./components/Product/Product";
 import Search from "./components/Search/Search";
+import AuthUser from "./components/User/AuthUser";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/products" element={<Product />} />
         <Route path="/products/:keyword"  element={<Product />}/>
         <Route path="/Search" element={<Search />}/>
+        <Route path="/login" element={<AuthUser />}/>
       </Routes>
       <Footer />
     </div>

@@ -1,9 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { clearErrors, login } from "../../actions/useraction";
+import { useDispatch, useSelector } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AuthUser = () => {
+  const dsipatch = useDispatch();
   const [authtoogle, setauthtoogle] = useState("login");
   const [loginemail, setloginemail] = useState("");
   const [loginpassword, setloginpassword] = useState("");
+
+  const { error, loading, isAuthenticated } = useSelector(
+    (state) => state.user
+  );
 
   const [user, setuser] = useState({
     name: "",
@@ -16,7 +25,9 @@ const AuthUser = () => {
   const [avatar, setavatar] = useState();
   const [avatarPreview, setavatarPreview] = useState();
 
-  const loginSumbit = () => {
+  const loginSumbit = (e) => {
+    e.preventDefault();
+    dsipatch(login(loginemail, loginpassword));
     console.log("submitted sigin");
   };
 
@@ -49,8 +60,37 @@ const AuthUser = () => {
     }
   };
 
+  useEffect(() => {
+    if (error) {
+      toast("🦄 Wow so easy!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+      console.log("error");
+      dsipatch(clearErrors());
+    }
+  }, [dsipatch, error ]);
+
   return (
     <>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       {authtoogle == "login" ? (
         <>
           <section class="bg-gray-50 dark:bg-gray-900">

@@ -3,8 +3,16 @@ const catchasyncerror = require("../middlewear/asyncerrors");
 const User = require("../models/userModel");
 const sendToken = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
+const cloudinary = require("cloudinary");
 
 exports.registerUser = catchasyncerror(async (req, res, next) => {
+
+  const mycloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+    folder: "avatars",
+    width: 150,
+    crop: "scale",
+  });
+
   const { name, email, password } = req.body;
 
   const user = await User.create({
@@ -12,8 +20,8 @@ exports.registerUser = catchasyncerror(async (req, res, next) => {
     email,
     password,
     avatar: {
-      public_id: "single id",
-      url: "Not url for now",
+      public_id: mycloud.public_id,
+      url: mycloud.secure_url,
     },
   });
 

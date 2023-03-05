@@ -15,6 +15,7 @@ const Product = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [price, setPrice] = useState([0, 25000]);
   const [category, setcategory] = useState("");
+  const [ratings, setratings] = useState(0);
   const { loading, error, products, productCount, resultPerPage } = useSelector(
     (state) => state.products
   );
@@ -31,8 +32,8 @@ const Product = () => {
 
   console.log(products);
   useEffect(() => {
-    dispatch(getProduct(keyword, currentPage, price, category));
-  }, [dispatch, keyword, currentPage, price, category]);
+    dispatch(getProduct(keyword, currentPage, price, category, ratings));
+  }, [dispatch, keyword, currentPage, price, category, ratings]);
 
   return (
     <>
@@ -73,6 +74,20 @@ const Product = () => {
                   </li>
                 ))}
               </ul>
+
+              <fieldset>
+                <Typography component="legend">Ratings Above</Typography>
+                <Slider
+                  value={ratings}
+                  onChange={(e, newrating) => {
+                    setratings(newrating);
+                  }}
+                  valueLabelDisplay="auto"
+                  aria-labelledby="continous-slider"
+                  min={0}
+                  max={5}
+                />
+              </fieldset>
             </div>
 
             {resultPerPage < productCount && (

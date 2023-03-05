@@ -8,10 +8,13 @@ import "./Product.css";
 import { Typography } from "@mui/material";
 import { Slider } from "@mui/material";
 
+const categories = ["laptop", "Footwear", "Bottom", "Tops", "Camera"];
+
 const Product = () => {
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
   const [price, setPrice] = useState([0, 25000]);
+  const [category, setcategory] = useState("");
   const { loading, error, products, productCount, resultPerPage } = useSelector(
     (state) => state.products
   );
@@ -28,8 +31,8 @@ const Product = () => {
 
   console.log(products);
   useEffect(() => {
-    dispatch(getProduct(keyword, currentPage, price));
-  }, [dispatch, keyword, currentPage, price]);
+    dispatch(getProduct(keyword, currentPage, price, category));
+  }, [dispatch, keyword, currentPage, price, category]);
 
   return (
     <>
@@ -58,6 +61,18 @@ const Product = () => {
                 min={0}
                 max={25000}
               />
+              <Typography>Categories</Typography>
+              <ul className="categoryBox">
+                {categories.map((category) => (
+                  <li
+                    className="category-link"
+                    key={category}
+                    onClick={() => setcategory(category)}
+                  >
+                    {category}
+                  </li>
+                ))}
+              </ul>
             </div>
 
             {resultPerPage < productCount && (

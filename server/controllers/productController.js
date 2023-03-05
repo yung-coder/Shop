@@ -29,6 +29,7 @@ exports.getAllProducts = catchasyncerror(async (req, res) => {
     success: true,
     products,
     productCount,
+    resultPerPage,
   });
 });
 

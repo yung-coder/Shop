@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 
 const AuthUser = () => {
-  const dsipatch = useDispatch();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [authtoogle, setauthtoogle] = useState("login");
   const [loginemail, setloginemail] = useState("");
@@ -29,7 +29,7 @@ const AuthUser = () => {
 
   const loginSumbit = (e) => {
     e.preventDefault();
-    dsipatch(login(loginemail, loginpassword));
+    dispatch(login(loginemail, loginpassword));
     console.log("submitted sigin");
   };
 
@@ -43,7 +43,7 @@ const AuthUser = () => {
     myfrom.set("password", password);
     myfrom.set("avatar", avatar);
     console.log("subitted signup");
-    dsipatch(register(myfrom));
+    dispatch(register(myfrom));
   };
 
   const registerDataChange = (e) => {
@@ -76,12 +76,12 @@ const AuthUser = () => {
         theme: "dark",
       });
       console.log("error");
-      dsipatch(clearErrors());
+      dispatch(clearErrors());
     }
     if (isAuthenticated) {
       navigate("/account");
     }
-  }, [dsipatch, error]);
+  }, [dispatch, error]);
 
   return (
     <>

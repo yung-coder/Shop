@@ -7,8 +7,10 @@ import Navbar from "./components/Navbar/Navbar";
 import Product from "./components/Product/Product";
 import Search from "./components/Search/Search";
 import AuthUser from "./components/User/AuthUser";
+import axios from "axios";
 
 function App() {
+  axios.defaults.withCredentials = true;
   return (
     <div className="App">
       <Navbar />

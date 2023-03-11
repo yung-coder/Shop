@@ -16,17 +16,17 @@ import UserOptions from "./components/Navbar/UserOptions";
 import Profile from "./components/User/Profile";
 
 function App() {
-
   axios.defaults.withCredentials = true;
-  const {   isAuthenticated , user  }  = useSelector((state) => state.user);
-   useEffect(() => {
+  const { isAuthenticated, user } = useSelector((state) => state.user);
+
+  useEffect(() => {
     store.dispatch(LoadUser());
   }, []);
 
   return (
     <div className="App">
       <Navbar />
-        {isAuthenticated  &&  <UserOptions  user={user}/> }
+      {isAuthenticated && <UserOptions user={user} />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/product/:id" element={<ProductDetails />} />

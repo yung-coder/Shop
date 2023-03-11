@@ -1,10 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ReactStars from "react-rating-stars-component";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { clearErrors, getProductDetails } from "../../actions/producaction";
 import ReviewCard from "../Card/ReviewCard";
 import Loader from "../loader/Loader";
+import "./Product.css";
+import {addItemsToCart } from "../../actions/cartaction";
 
 const ProductDetails = () => {
   const dispatch = useDispatch();
@@ -27,6 +29,28 @@ const ProductDetails = () => {
     value: product.ratings,
     readOnly: true,
     precision: 0.5,
+  };
+
+  const [quantity, setquantity] = useState(1);
+
+  const increasequantity = () => {
+    if (product.Stock <= quantity) {
+      return;
+    }
+    const qty = quantity + 1;
+    setquantity(qty);
+  };
+
+  const decreasequantity = () => {
+    if (1 >= quantity) {
+      return;
+    }
+    const qty = quantity - 1;
+    setquantity(qty);
+  };
+
+  const addToCartHandler = () => {
+    dispatch(addItemsToCart(id, quantity));
   };
 
   return (
@@ -56,11 +80,22 @@ const ProductDetails = () => {
                       <div class="flex md:    ml-1 items-center">
                         <span class="mr-3 text-xl">Quantity:</span>
                         <div class="relative flex  space-x-5 p-3">
-                          <button className="bg-black text-white w-10">
+                          <button
+                            className="bg-black text-white w-10"
+                            onClick={increasequantity}
+                          >
                             +
                           </button>
-                          <h1>4</h1>
-                          <button className="bg-black text-white w-10">
+                          <input
+                            type="number"
+                            value={quantity}
+                            readOnly
+                            className="w-8"
+                          />
+                          <button
+                            className="bg-black text-white w-10"
+                            onClick={decreasequantity}
+                          >
                             -
                           </button>
                         </div>
@@ -70,7 +105,10 @@ const ProductDetails = () => {
                       <span class="title-font font-medium text-2xl text-white">
                         ₹{product.price}
                       </span>
-                      <button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
+                      <button
+                        class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded"
+                        onClick={addToCartHandler}
+                      >
                         ADD TO CART
                       </button>
                       <button class="rounded-full w-10 h-10 bg-gray-800 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">

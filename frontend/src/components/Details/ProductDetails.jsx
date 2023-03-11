@@ -90,7 +90,7 @@ const ProductDetails = () => {
                             type="number"
                             value={quantity}
                             readOnly
-                            className="w-8"
+                            className="w-8 text-black px-3"
                           />
                           <button
                             className="bg-black text-white w-10"

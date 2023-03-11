@@ -15,6 +15,7 @@ import { useSelector } from "react-redux";
 import UserOptions from "./components/Navbar/UserOptions";
 import Profile from "./components/User/Profile";
 import UpdatedProfile from "./components/User/UpdatedProfile";
+import Cart from "./components/Cart/Cart";
 
 function App() {
   axios.defaults.withCredentials = true;
@@ -41,7 +42,7 @@ function App() {
         <Route path="/Search" element={<Search />} />
         <Route path="/login" element={<AuthUser />} />
         <Route path="/me/update" element={<UpdatedProfile />} />
-
+        <Route path="/cart" element={<Cart />} />
       </Routes>
       <Footer />
     </div>

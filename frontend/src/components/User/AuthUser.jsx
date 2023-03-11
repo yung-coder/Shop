@@ -3,10 +3,11 @@ import { clearErrors, login, register } from "../../actions/useraction";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const AuthUser = () => {
   const dispatch = useDispatch();
+  let location = useLocation();
   const navigate = useNavigate();
   const [authtoogle, setauthtoogle] = useState("login");
   const [loginemail, setloginemail] = useState("");
@@ -63,6 +64,8 @@ const AuthUser = () => {
     }
   };
 
+  const redirect = location.search ? location.search.split("=")[1] : "/account";
+
   useEffect(() => {
     if (error) {
       toast("🦄 Wow so easy!", {
@@ -79,7 +82,7 @@ const AuthUser = () => {
       dispatch(clearErrors());
     }
     if (isAuthenticated) {
-      navigate("/account");
+      navigate(redirect);
     }
   }, [dispatch, error]);
 

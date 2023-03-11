@@ -28,7 +28,7 @@ export const userReducer = (state = { user: {} }, action) => {
         ...state,
         loading: false,
         isAuthenticated: true,
-        user: action.paylod,
+        user: action.payload,
       };
 
     case LOGIN_FAIL:
@@ -46,7 +46,7 @@ export const userReducer = (state = { user: {} }, action) => {
         loading: false,
         isAuthenticated: false,
         user: null,
-        error: action.paylod,
+        error: action.payload,
       };
 
     case CLEAR_ERRORS:

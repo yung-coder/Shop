@@ -11,16 +11,22 @@ import axios from "axios";
 import { useEffect } from "react";
 import store from "./store";
 import { LoadUser } from "./actions/useraction";
+import { useSelector } from "react-redux";
+import UserOptions from "./components/User/UserOptions";
 
 function App() {
+
   axios.defaults.withCredentials = true;
-  useEffect(() => {
+  const {   isAuthenticated , user  }  = useSelector((state) => state.user);
+  console.log(user, 'app');
+   useEffect(() => {
     store.dispatch(LoadUser());
   }, []);
 
   return (
     <div className="App">
       <Navbar />
+        {isAuthenticated  &&  <UserOptions  user={user}/> }
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/product/:id" element={<ProductDetails />} />

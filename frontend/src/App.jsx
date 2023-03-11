@@ -13,12 +13,12 @@ import store from "./store";
 import { LoadUser } from "./actions/useraction";
 import { useSelector } from "react-redux";
 import UserOptions from "./components/Navbar/UserOptions";
+import Profile from "./components/User/Profile";
 
 function App() {
 
   axios.defaults.withCredentials = true;
   const {   isAuthenticated , user  }  = useSelector((state) => state.user);
-  console.log(user, 'app');
    useEffect(() => {
     store.dispatch(LoadUser());
   }, []);
@@ -32,6 +32,7 @@ function App() {
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/products" element={<Product />} />
         <Route path="/products/:keyword" element={<Product />} />
+        <Route path="/account" element={<Profile />} />
         <Route path="/Search" element={<Search />} />
         <Route path="/login" element={<AuthUser />} />
       </Routes>

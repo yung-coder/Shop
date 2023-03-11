@@ -12,7 +12,7 @@ import { useEffect } from "react";
 import store from "./store";
 import { LoadUser } from "./actions/useraction";
 import { useSelector } from "react-redux";
-import UserOptions from "./components/User/UserOptions";
+import UserOptions from "./components/Navbar/UserOptions";
 
 function App() {
 

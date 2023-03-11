@@ -14,6 +14,7 @@ import { LoadUser } from "./actions/useraction";
 import { useSelector } from "react-redux";
 import UserOptions from "./components/Navbar/UserOptions";
 import Profile from "./components/User/Profile";
+import UpdatedProfile from "./components/User/UpdatedProfile";
 
 function App() {
   axios.defaults.withCredentials = true;
@@ -32,9 +33,15 @@ function App() {
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/products" element={<Product />} />
         <Route path="/products/:keyword" element={<Product />} />
-        <Route path="/account" element={<Profile />} />
+        {isAuthenticated ? (
+          <Route path="/account" element={<Profile />} />
+        ) : (
+          <Route path="/login" element={<AuthUser />} />
+        )}
         <Route path="/Search" element={<Search />} />
         <Route path="/login" element={<AuthUser />} />
+        <Route path="/me/update" element={<UpdatedProfile />} />
+
       </Routes>
       <Footer />
     </div>

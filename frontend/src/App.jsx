@@ -21,6 +21,9 @@ import ConfirmOrder from "./components/Cart/ConfirmOrder";
 import Payment from "./components/Cart/Payment";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import OrderSuccess from "./components/Cart/OrderSuccess";
+import MyOrder from "./components/Order/MyOrder";
+import OrderDetails from "./components/Order/OrderDetails";
 
 function App() {
   axios.defaults.withCredentials = true;
@@ -77,6 +80,21 @@ function App() {
               </Elements>
             }
           />
+        ) : (
+          <Route path="/login" element={<AuthUser />} />
+        )}
+        {isAuthenticated ? (
+          <Route path="/success" element={<OrderSuccess />} />
+        ) : (
+          <Route path="/login" element={<AuthUser />} />
+        )}
+        {isAuthenticated ? (
+          <Route path="/orders" element={<MyOrder />} />
+        ) : (
+          <Route path="/login" element={<AuthUser />} />
+        )}
+         {isAuthenticated ? (
+          <Route path="/order/:id" element={<OrderDetails />} />
         ) : (
           <Route path="/login" element={<AuthUser />} />
         )}

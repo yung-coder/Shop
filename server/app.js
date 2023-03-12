@@ -5,6 +5,7 @@ const cors = require("cors");
 const errorMiddleware = require("./middlewear/error");
 const fileUpload = require("express-fileupload");
 const bodyParser = require("body-parser");
+require("dotenv").config({ path: "server/config/config.env" });
 
 app.use(express.json());
 app.use(cookieParser());
@@ -20,10 +21,12 @@ app.use(fileUpload());
 const Product = require("./routes/productRoute");
 const user = require("./routes/userRoute");
 const order = require("./routes/orderRoute");
+const payment = require("./routes/paymentroute");
 
 app.use("/api/v1", Product);
 app.use("/api/v1", user);
 app.use("/api/v1", order);
+app.use("/api/v1", payment);
 // middlewear error
 app.use(errorMiddleware);
 

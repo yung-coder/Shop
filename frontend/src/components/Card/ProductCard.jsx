@@ -11,7 +11,7 @@ const ProductCard = ({ product }) => {
     >
       <img
         class="w-full h-40   object-contain rounded-t-md"
-        src={product.images[0] ? product.images[0] : ""}
+        src={product.images[0] ? product.images[0] : "https://www.erdshoppe.com/wp-content/uploads/2021/12/ERD-TC-21-Micro-USB-Charger-2-Amp-Mobile-Charger-with-Detachable-Cable-White-Cable-Included-1.jpg"}
         alt=""
       />
       <div class="mt-4">

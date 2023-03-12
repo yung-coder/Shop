@@ -17,6 +17,7 @@ import Profile from "./components/User/Profile";
 import UpdatedProfile from "./components/User/UpdatedProfile";
 import Cart from "./components/Cart/Cart";
 import Shipping from "./components/Cart/Shipping";
+import ConfirmOrder from "./components/Cart/ConfirmOrder";
 
 function App() {
   axios.defaults.withCredentials = true;
@@ -46,6 +47,11 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         {isAuthenticated ? (
           <Route path="/shipping" element={<Shipping />} />
+        ) : (
+          <Route path="/login" element={<AuthUser />} />
+        )}
+        {isAuthenticated ? (
+          <Route path="/order/confirm" element={<ConfirmOrder />} />
         ) : (
           <Route path="/login" element={<AuthUser />} />
         )}
